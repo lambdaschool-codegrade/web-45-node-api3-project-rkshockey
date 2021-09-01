@@ -9,7 +9,7 @@ function validateUserId(req, res, next) {
   getById(req.params.id)
     .then(user => {
       if (user){
-        req.user === user;
+        req.user = user;
         next()
       }else{
         next({status: 404, message: "user not found" })
@@ -34,10 +34,10 @@ function validatePost(req, res, next) {
   }
 }
 
+//eslint-disable-next-line
 function errorHandler(err, req, res, next){
   console.log(err);
-  res.status(err.status).json({message: err.message});
+  res.status(err.status).json({ message: err.message });
 }
 
-// do not forget to expose these functions to other modules
 module.exports = { logger, validateUserId, validateUser, validatePost, errorHandler };
