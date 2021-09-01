@@ -34,14 +34,17 @@ router.delete('/:id', validateUserId, (req, res, next) => {
 });
 
 router.get('/:id/posts', validateUserId, (req, res, next) => {
-  Posts.getById(req.params.id)
-    .then(posts => res.status(200).json(posts))
+  Posts.get()
+    .then(posts => res.status(200).json(posts.filter(post => post.user_id == req.params.id)))
     .catch(next)
 });
 
 router.post('/:id/posts', validateUserId, validatePost, (req, res, next) => {
-  Posts.insert(req.body)
-    .then(post => res.status(200).json(post))
+  Posts.insert({ ...req.body, user_id: req.params.id })
+    .then(post => {
+      console.log(post);
+      res.status(200).json(post);
+    })
     .catch(next)
 });
 
