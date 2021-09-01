@@ -34,16 +34,15 @@ router.delete('/:id', validateUserId, (req, res, next) => {
 });
 
 router.get('/:id/posts', validateUserId, (req, res, next) => {
-  // RETURN THE ARRAY OF USER POSTS
-  // this needs a middleware to verify user id
-  res.json({ message: 'user posts'});
+  Posts.getById(req.params.id)
+    .then(posts => res.status(200).json(posts))
+    .catch(next)
 });
 
 router.post('/:id/posts', validateUserId, validatePost, (req, res, next) => {
-  // RETURN THE NEWLY CREATED USER POST
-  // this needs a middleware to verify user id
-  // and another middleware to check that the request body is valid
-  res.json({ message: 'new post'});
+  Posts.insert(req.body)
+    .then(post => res.status(200).json(post))
+    .catch(next)
 });
 
 module.exports = router;
