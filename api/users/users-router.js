@@ -8,45 +8,45 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
   // RETURN AN ARRAY WITH ALL THE USERS
-  res.json.message('all users');
+  res.json({ message: 'all users'});
 });
 
 router.get('/:id', validateUserId, (req, res, next) => {
   // RETURN THE USER OBJECT
   // this needs a middleware to verify user id
-  res.json.message('individual user');
+  res.json({ message: 'user'});
 });
 
 router.post('/', validateUser, (req, res, next) => {
   // RETURN THE NEWLY CREATED USER OBJECT
   // this needs a middleware to check that the request body is valid
-  res.json.message('new user');
+  res.json({ message: 'new user'});
 });
 
 router.put('/:id', validateUserId, validateUser, (req, res, next) => {
   // RETURN THE FRESHLY UPDATED USER OBJECT
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
-  res.json.message('update user');
+  res.json({ message: 'updated user'});
 });
 
 router.delete('/:id', validateUserId, (req, res, next) => {
   // RETURN THE FRESHLY DELETED USER OBJECT
   // this needs a middleware to verify user id
-  res.json.message('deleted user');
+  res.json({ message: 'deleted user'});
 });
 
 router.get('/:id/posts', validateUserId, (req, res, next) => {
   // RETURN THE ARRAY OF USER POSTS
   // this needs a middleware to verify user id
-  res.json.message('User posts');
+  res.json({ message: 'user posts'});
 });
 
 router.post('/:id/posts', validateUserId, validatePost, (req, res, next) => {
   // RETURN THE NEWLY CREATED USER POST
   // this needs a middleware to verify user id
   // and another middleware to check that the request body is valid
-  res.json.message('New post');
+  res.json({ message: 'new post'});
 });
 
 // do not forget to export the router
